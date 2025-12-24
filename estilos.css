@@ -1,0 +1,325 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #040714;
+  color: white;
+  overflow: hidden;
+}
+
+/* AURORA NAVIDEÑA */
+.aurora {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, #0f9d58, transparent 40%),
+    radial-gradient(circle at 80% 40%, #db4437, transparent 40%),
+    radial-gradient(circle at 50% 80%, #f4b400, transparent 40%);
+  filter: blur(80px);
+  animation: move 18s infinite alternate ease-in-out;
+  z-index: -2;
+}
+
+@keyframes move {
+  to {
+    transform: translateY(-60px) translateX(40px);
+  }
+}
+
+/* INTRO */
+#intro {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 25px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(255,255,255,0.2);
+  animation: fadeIn 1.5s ease;
+}
+
+.card h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.card button {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, #db4437, #0f9d58);
+  color: white;
+  box-shadow: 0 0 25px rgba(255,255,255,0.5);
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* CANVAS */
+canvas {
+  position: fixed;
+  inset: 0;
+}
+
+/* MENSAJE */
+#message {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  pointer-events: none;
+}
+
+#message h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  text-shadow: 0 0 30px #fff;
+}
+
+#message span {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  opacity: 0;
+  animation: appear 3s forwards 1.5s;
+}
+
+@keyframes appear {
+  to { opacity: 1; }
+}
+
+/* =======================
+   RESPONSIVE CELULAR
+======================= */
+@media (max-width: 600px) {
+
+  /* INTRO */
+  .card {
+    width: 92%;
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  .card h1 {
+    font-size: 1.6rem;
+  }
+
+  .card p {
+    font-size: 0.95rem;
+  }
+
+  .card button {
+    width: 58px;
+    height: 58px;
+    font-size: 1.6rem;
+  }
+
+  /* MENSAJE PRINCIPAL */
+  #message h1 {
+    font-size: 2.4rem;
+    letter-spacing: 0.15em;
+  }
+
+  #message span {
+    font-size: 1rem;
+    padding: 0 22px;
+    text-align: center;
+  }
+
+  /* ÁRBOL */
+  #tree {
+    width: 140px;
+    height: 210px;
+    bottom: 35px;
+  }
+
+  .layer {
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+  }
+
+  .layer1 {
+    border-bottom: 65px solid #0f9d58;
+  }
+
+  .layer2 {
+    border-bottom: 75px solid #0c7c45;
+  }
+
+  .layer3 {
+    border-bottom: 85px solid #095c34;
+  }
+
+  .trunk {
+    width: 30px;
+    height: 40px;
+  }
+
+  .star {
+    font-size: 1.6rem;
+  }
+
+  /* MENSAJE NAVIDEÑO */
+  #christmasMessage {
+    padding: 25px 18px;
+  }
+
+  #christmasMessage h1 {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+  }
+
+  #christmasMessage p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+}
+
+/* =======================
+   ÁRBOL DE NAVIDAD
+======================= */
+#tree {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 260px;
+  z-index: 5;
+  display: none;
+  animation: fadeUp 2s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translate(-50%, 30px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 90px solid transparent;
+  border-right: 90px solid transparent;
+  filter: drop-shadow(0 0 15px rgba(0,255,120,0.6));
+}
+
+.layer1 {
+  top: 40px;
+  border-bottom: 80px solid #0f9d58;
+}
+
+.layer2 {
+  top: 80px;
+  border-bottom: 90px solid #0c7c45;
+}
+
+.layer3 {
+  top: 130px;
+  border-bottom: 100px solid #095c34;
+}
+
+.trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 45px;
+  background: #6d4c41;
+  border-radius: 5px;
+}
+
+.star {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  animation: glowStar 1.5s infinite alternate;
+}
+
+@keyframes glowStar {
+  from { text-shadow: 0 0 10px gold; }
+  to { text-shadow: 0 0 25px gold; }
+}
+
+/* =======================
+   MENSAJE NAVIDEÑO
+======================= */
+#christmasMessage {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  z-index: 6;
+  animation: fadeIn 2s ease forwards;
+}
+
+#christmasMessage h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  margin-bottom: 20px;
+  text-shadow: 0 0 30px rgba(255,255,255,0.8);
+}
+
+#christmasMessage p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 500px;
+  opacity: 0.95;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  #tree {
+    width: 140px;
+    height: 210px;
+    bottom: 40px;
+  }
+
+  #christmasMessage p {
+    font-size: 1rem;
+  }
+}
+#christmasMessage {
+  background: radial-gradient(circle, rgba(0,0,0,0.35), transparent 70%);
+}
